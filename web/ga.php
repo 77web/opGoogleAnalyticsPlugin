@@ -160,7 +160,13 @@
         "&utmcc=__utma%3D999.999.999.999.999.1%3B" .
         "&utmvid=" . $visitorId .
         "&utmip=" . getIP($_SERVER["REMOTE_ADDR"]);
-
+    
+    //sns member id as custom var
+    if(!empty($_GET['memberId']))
+    {
+      $utmUrl .= urlencode('8(MemberId)9('.$_GET['memberId'].')11(2)');
+    }
+    
     sendRequestToGoogleAnalytics($utmUrl);
 
     // If the debug parameter is on, add a header to the response that contains

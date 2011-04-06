@@ -1,10 +1,8 @@
 <?php
-function executeCodeMobile($code)
-{
+
   $url = "/opMarketingPlugin/";
   $url .= "ga.php?";
-  //
-  $url .= "utmac=" . $code;
+  $url .= "utmac=" . $mo;
   $url .= "&utmn=" . rand(0, 0x7fffffff);
   $referer = @$_SERVER["HTTP_REFERER"];
   $query = $_SERVER["QUERY_STRING"];
@@ -17,8 +15,10 @@ function executeCodeMobile($code)
     $url .= "&utmp=" . urlencode($path);
   }
   $url .= "&guid=ON";
-  return $url;
-}
+  if($sf_user->isAuthenticated())
+  {
+    $url .= '&memberId='.$sf_user->getMemberId();
+  }
+  $url = str_replace('&', '&amp;', $url);
 
-?>
-<img src="<?php echo executeCodeMobile( Doctrine::getTable('SnsConfig')->get('opmarketingplugin_ga_account_mobile', 'none')); ?>" />
+echo image_tag($url);
