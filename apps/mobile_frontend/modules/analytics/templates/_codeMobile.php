@@ -4,9 +4,8 @@
   $url .= "ga.php?";
   $url .= "utmac=" . $mo;
   $url .= "&utmn=" . rand(0, 0x7fffffff);
-  $referer = @$_SERVER["HTTP_REFERER"];
-  $query = $_SERVER["QUERY_STRING"];
-  $path = $_SERVER["REQUEST_URI"];
+  $referer = $sf_request->getReferer();
+  $path = $sf_request->getPathInfo()
   if (empty($referer)) {
     $referer = "-";
   }
