@@ -1,11 +1,15 @@
 <?php
 
+if('none' !== $mo)
+{
+
   $url = "/opMarketingPlugin/";
   $url .= "ga.php?";
+  
   $url .= "utmac=" . $mo;
   $url .= "&utmn=" . rand(0, 0x7fffffff);
   $referer = $sf_request->getReferer();
-  $path = $sf_request->getPathInfo()
+  $path = $sf_request->getUri();
   if (empty($referer)) {
     $referer = "-";
   }
